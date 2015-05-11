@@ -1,0 +1,2 @@
+# In yocto we typically use the build directory
+build
