@@ -162,6 +162,7 @@ typedef struct {
 typedef struct {
     int     number_ports;           /*!< Number of ports in this subsystem */
     int     max_port_speed;         /*!< Max port speed in Mbits/sec */
+    int     max_transmission_unit;  /*!< Max MTU */
     int     max_lag_count;          /*!< Max support lags */
     int     max_lag_member_count;   /*!< Max members allowed in a lag */
 } YamlPortInfo;

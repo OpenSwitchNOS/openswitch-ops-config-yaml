@@ -73,6 +73,7 @@ static void operator >> (const YAML::Node &node, YamlPortInfo &port_info)
 {
     node["number_ports"] >> port_info.number_ports;
     node["max_port_speed"] >> port_info.max_port_speed;
+    node["max_transmission_unit"] >> port_info.max_transmission_unit;
     node["max_lag_count"] >> port_info.max_lag_count;
     node["max_lag_member_count"] >> port_info.max_lag_member_count;
 }
@@ -790,6 +791,7 @@ init_info_fields(YamlSubsystem *sub)
     // YamlPortInfo
     sub->port_info.number_ports = 0;
     sub->port_info.max_port_speed = 0;
+    sub->port_info.max_transmission_unit = 0;
     sub->port_info.max_lag_count = 0;
     sub->port_info.max_lag_member_count = 0;
 
