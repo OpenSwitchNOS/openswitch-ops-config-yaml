@@ -239,7 +239,7 @@ i2c_execute(
             msgbuf[i].flags = all_cmds[i]->direction ? 0 : I2C_M_RD;
             msgbuf[i].len = all_cmds[i]->byte_count;
             msgbuf[i].addr = dev->address;
-            msgbuf[i].buf = all_cmds[i]->data;
+            msgbuf[i].buf = (char *)all_cmds[i]->data;
             idx++;
         }
 

@@ -17,6 +17,9 @@ set (CONFIG_YAML config-yaml)
 project (${CONFIG_YAML})
 cmake_minimum_required (VERSION 2.8)
 
+# Define compile flags
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 -Wall -Werror")
+
 ###
 ### Define sources
 ###
