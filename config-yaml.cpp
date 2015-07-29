@@ -76,6 +76,7 @@ static void operator >> (const YAML::Node &node, YamlPortInfo &port_info)
     node["max_transmission_unit"] >> port_info.max_transmission_unit;
     node["max_lag_count"] >> port_info.max_lag_count;
     node["max_lag_member_count"] >> port_info.max_lag_member_count;
+    node["L3_port_requires_internal_VLAN"] >> port_info.l3_port_requires_internal_vlan;
 }
 
 static void operator >> (const YAML::Node &node, vector<string> &list)
@@ -794,6 +795,7 @@ init_info_fields(YamlSubsystem *sub)
     sub->port_info.max_transmission_unit = 0;
     sub->port_info.max_lag_count = 0;
     sub->port_info.max_lag_member_count = 0;
+    sub->port_info.l3_port_requires_internal_vlan = 0;
 
     // YamlFanInfo
     sub->fan_info.number_fan_frus = 0;

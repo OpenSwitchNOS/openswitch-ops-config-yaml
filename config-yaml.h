@@ -165,6 +165,7 @@ typedef struct {
     int     max_transmission_unit;  /*!< Max MTU */
     int     max_lag_count;          /*!< Max support lags */
     int     max_lag_member_count;   /*!< Max members allowed in a lag */
+    bool    l3_port_requires_internal_vlan; /*!< L3 port requires internal VLAN */
 } YamlPortInfo;
 
 /************************************************************************//**
