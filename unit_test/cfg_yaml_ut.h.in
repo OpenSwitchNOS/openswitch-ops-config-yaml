@@ -21,5 +21,6 @@
 #define BASE_SUBSYSTEM      "base"
 
 #define CFG_YAML_UT_SRC_DIR     "@PROJECT_SOURCE_DIR@"
+#define CFG_YAML_UT_FILE_DIR   "/tmp"
 
 #endif  /* _CONFIG_YAML_UT_H_ */

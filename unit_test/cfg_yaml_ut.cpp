@@ -99,7 +99,7 @@ TEST_F(CfgYamlTestSuite, cfg_001_yaml_add_subsystem) {
     int     rc = 0;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
     /* Try creating a subsystem with invalid directory.
@@ -108,7 +108,9 @@ TEST_F(CfgYamlTestSuite, cfg_001_yaml_add_subsystem) {
     rc = yaml_add_subsystem(cy_handle, "test_subsys", "junk_dir");
     ASSERT_NE(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, GOOD_MANIFEST, MANIFEST_FILE);
+
     /* Try creating a subsystem. It should PASS. */
     printf("Create a new base SUBSYSTEM with valid params.\n");
     rc = yaml_add_subsystem(cy_handle, BASE_SUBSYSTEM, cwd);
@@ -138,9 +140,10 @@ TEST_F(CfgYamlTestSuite, cfg_002_yaml_parse_devices) {
     int     rc = 0;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, GOOD_MANIFEST, MANIFEST_FILE);
 
     /* Try creating a subsystem. It should PASS. */
@@ -174,9 +177,10 @@ TEST_F(CfgYamlTestSuite, cfg_003_yaml_find_file) {
     const YamlFile    *yfp = NULL;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, GOOD_MANIFEST, MANIFEST_FILE);
 
     /* Try creating a subsystem. It should PASS. */
@@ -210,9 +214,10 @@ TEST_F(CfgYamlTestSuite, cfg_004_yaml_init_devices) {
     int     rc = 0;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, GOOD_MANIFEST, MANIFEST_FILE);
 
     /* Try creating a subsystem. It should PASS. */
@@ -248,9 +253,10 @@ TEST_F(CfgYamlTestSuite, cfg_005_yaml_parse_good_files) {
     int     rc = 0;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, GOOD_MANIFEST, MANIFEST_FILE);
 
     /* Try creating a subsystem. It should PASS. */
@@ -307,9 +313,10 @@ TEST_F(CfgYamlTestSuite, cfg_006_yaml_parse_bad_files) {
     int     rc = 0;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, BAD_MANIFEST, MANIFEST_FILE);
 
     /* Try creating a subsystem. It should PASS. */
@@ -366,9 +373,10 @@ TEST_F(CfgYamlTestSuite, cfg_007_yaml_parse_unspecified_bad_files) {
     int     rc = 0;
 
     /* Test YAML files are stored in ./yaml_files dir. */
-    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_SRC_DIR, "yaml_files");
+    rc = snprintf(cwd, sizeof(cwd), "%s/%s", CFG_YAML_UT_FILE_DIR, "yaml_files");
     ASSERT_GT(rc, 0);
 
+    unlink_file(cwd, MANIFEST_FILE);
     link_file(cwd, EMPTY_MANIFEST, MANIFEST_FILE);
 
     /* Try creating a subsystem. It should PASS. */

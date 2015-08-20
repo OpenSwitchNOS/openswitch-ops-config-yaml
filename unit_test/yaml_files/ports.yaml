@@ -20,360 +20,126 @@ product_name:    UNIT_TEST
 version:         '1'
 
 port_info:
-    number_ports:    70
+    number_ports:    78
     max_port_speed:  40000
-
+    max_transmission_unit: 1500
     max_lag_count:         1024
     max_lag_member_count:  256
+    L3_port_requires_internal_VLAN: False
 
 #  Import or reference devices.yaml file
-
-
-#  Note: We will need PHY information for future switches
-#        Should include an array of PHY descriptors
-#        and add info to port indicating the associated PHY
 
 ports:
     -  name:             1
        switch_device:      0
        switch_device_port: 1
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp1
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x01
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x01
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x01
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x01
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x01
-                polarity:   negative
+
     -  name:             2
        switch_device:      0
        switch_device_port: 2
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp2
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x02
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x02
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x02
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x02
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x02
-                polarity:   negative
+
     -  name:             3
        switch_device:      0
        switch_device_port: 3
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp3
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x04
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x04
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x04
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x04
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x04
-                polarity:   negative
+
     -  name:             4
        switch_device:      0
        switch_device_port: 4
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp4
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x08
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x08
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x08
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x08
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x08
-                polarity:   negative
+
     -  name:             5
        switch_device:      0
        switch_device_port: 5
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp5
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x10
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x10
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x10
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x10
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x10
-                polarity:   negative
+
     -  name:             6
        switch_device:      0
        switch_device_port: 6
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp6
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x20
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x20
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x20
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x20
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x20
-                polarity:   negative
+
     -  name:             7
        switch_device:      0
        switch_device_port: 7
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp7
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x40
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x40
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x40
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x40
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x40
-                polarity:   negative
+
     -  name:             8
        switch_device:      0
        switch_device_port: 8
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp8
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0C
-                bitmask:    0x80
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x09
-                bitmask:    0x80
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x0F
-                bitmask:    0x80
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x06
-                bitmask:    0x80
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x03
-                bitmask:    0x80
-                polarity:   negative
+
     -  name:             9
        switch_device:      0
        switch_device_port: 9
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp9
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0D
-                bitmask:    0x01
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x0A
-                bitmask:    0x01
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x10
-                bitmask:    0x01
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x07
-                bitmask:    0x01
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x04
-                bitmask:    0x01
-                polarity:   negative
+
     -  name:             10
        switch_device:      0
        switch_device_port: 10
-       pluggable:          True
-       connector:          SFP_PLUS
-       max_speed:          10000
-       speeds:             [1000,10000]  # supported speeds in Mb/S
-       capabilities:       [enet1G, enet10G]
+       pluggable:          False
+       connector:          RJ45
+       max_speed:          1000
+       speeds:             [1000]  # supported speeds in Mb/S
+       capabilities:       [enet1G]
        subports:           []
        supported_modules:  [TBD]
-       module_eeprom:      sfpp10
-       module_signals:         # device - hex address - bit mask
-             sfpp_tx_disable:
-                device:     cpld2
-                register:   0x0D
-                bitmask:    0x02
-             sfpp_tx_fault:
-                device:     cpld2
-                register:   0x0A
-                bitmask:    0x02
-             sfpp_rx_loss:
-                device:     cpld2
-                register:   0x10
-                bitmask:    0x02
-             sfpp_mod_present:
-                device:     cpld2
-                register:   0x08
-                bitmask:    0x02
-                polarity:   negative
-             sfpp_interrupt:
-                device:     cpld2
-                register:   0x04
-                bitmask:    0x02
-                polarity:   negative
+
     -  name:             11
        switch_device:      0
        switch_device_port: 11
@@ -1750,7 +1516,7 @@ ports:
        subport_number:      4
     -  name:             50
        switch_device:      0
-       switch_device_port: 53
+       switch_device_port: 57
        pluggable:          True
        connector:          QSFP_PLUS
        max_speed:          40000
@@ -1763,27 +1529,27 @@ ports:
             qsfpp_reset:
                 device:     cpld3
                 register:   0x15
-                bitmask:    0x02
+                bitmask:    0x04
             qsfpp_mod_present:
                 device:     cpld3
                 register:   0x14
-                bitmask:    0x02
+                bitmask:    0x04
                 polarity:   negative
             qsfpp_int:
                 device:     cpld3
                 register:   0x13
-                bitmask:    0x02
+                bitmask:    0x04
             qsfpp_lp_mode:
                 device:     cpld3
                 register:   0x16
-                bitmask:    0x02
+                bitmask:    0x04
             qsfpp_interrupt:
                 device:     cpld3
                 register:   0x12
-                bitmask:    0x02
+                bitmask:    0x04
     -  name:             "50-1"
        switch_device:      0
-       switch_device_port: 53
+       switch_device_port: 57
        parent_port:        50
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1795,7 +1561,7 @@ ports:
        subport_number:      1
     -  name:             "50-2"
        switch_device:      0
-       switch_device_port: 54
+       switch_device_port: 58
        parent_port:        50
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1807,7 +1573,7 @@ ports:
        subport_number:      2
     -  name:             "50-3"
        switch_device:      0
-       switch_device_port: 55
+       switch_device_port: 59
        parent_port:        50
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1819,7 +1585,7 @@ ports:
        subport_number:      3
     -  name:             "50-4"
        switch_device:      0
-       switch_device_port: 56
+       switch_device_port: 60
        parent_port:        50
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1831,7 +1597,7 @@ ports:
        subport_number:      4
     -  name:             51
        switch_device:      0
-       switch_device_port: 57
+       switch_device_port: 65
        pluggable:          True
        connector:          QSFP_PLUS
        max_speed:          40000
@@ -1844,27 +1610,27 @@ ports:
             qsfpp_reset:
                 device:     cpld3
                 register:   0x15
-                bitmask:    0x04
+                bitmask:    0x10
             qsfpp_mod_present:
                 device:     cpld3
                 register:   0x14
-                bitmask:    0x04
+                bitmask:    0x10
                 polarity:   negative
             qsfpp_int:
                 device:     cpld3
                 register:   0x13
-                bitmask:    0x04
+                bitmask:    0x10
             qsfpp_lp_mode:
                 device:     cpld3
                 register:   0x16
-                bitmask:    0x04
+                bitmask:    0x10
             qsfpp_interrupt:
                 device:     cpld3
                 register:   0x12
-                bitmask:    0x04
+                bitmask:    0x10
     -  name:             "51-1"
        switch_device:      0
-       switch_device_port: 57
+       switch_device_port: 65
        parent_port:        51
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1876,7 +1642,7 @@ ports:
        subport_number:      1
     -  name:             "51-2"
        switch_device:      0
-       switch_device_port: 58
+       switch_device_port: 66
        parent_port:        51
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1888,7 +1654,7 @@ ports:
        subport_number:      2
     -  name:             "51-3"
        switch_device:      0
-       switch_device_port: 59
+       switch_device_port: 67
        parent_port:        51
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1900,7 +1666,7 @@ ports:
        subport_number:      3
     -  name:             "51-4"
        switch_device:      0
-       switch_device_port: 60
+       switch_device_port: 68
        parent_port:        51
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1912,7 +1678,7 @@ ports:
        subport_number:      4
     -  name:             52
        switch_device:      0
-       switch_device_port: 61
+       switch_device_port: 53
        pluggable:          True
        connector:          QSFP_PLUS
        max_speed:          40000
@@ -1925,27 +1691,27 @@ ports:
             qsfpp_reset:
                 device:     cpld3
                 register:   0x15
-                bitmask:    0x08
+                bitmask:    0x02
             qsfpp_mod_present:
                 device:     cpld3
                 register:   0x14
-                bitmask:    0x08
+                bitmask:    0x02
                 polarity:   negative
             qsfpp_int:
                 device:     cpld3
                 register:   0x13
-                bitmask:    0x08
+                bitmask:    0x02
             qsfpp_lp_mode:
                 device:     cpld3
                 register:   0x16
-                bitmask:    0x08
+                bitmask:    0x02
             qsfpp_interrupt:
                 device:     cpld3
                 register:   0x12
-                bitmask:    0x08
+                bitmask:    0x02
     -  name:             "52-1"
        switch_device:      0
-       switch_device_port: 61
+       switch_device_port: 53
        parent_port:        52
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1957,7 +1723,7 @@ ports:
        subport_number:      1
     -  name:             "52-2"
        switch_device:      0
-       switch_device_port: 62
+       switch_device_port: 54
        parent_port:        52
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1969,7 +1735,7 @@ ports:
        subport_number:      2
     -  name:             "52-3"
        switch_device:      0
-       switch_device_port: 63
+       switch_device_port: 55
        parent_port:        52
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1981,7 +1747,7 @@ ports:
        subport_number:      3
     -  name:             "52-4"
        switch_device:      0
-       switch_device_port: 64
+       switch_device_port: 56
        parent_port:        52
        pluggable:          False
        connector:          QSFP_PLUS
@@ -1993,37 +1759,85 @@ ports:
        subport_number:      4
     -  name:             53
        switch_device:      0
-       switch_device_port: 65
+       switch_device_port: 61
        pluggable:          True
        connector:          QSFP_PLUS
        max_speed:          40000
        speeds:             [40000]
-       capabilities:       [enet40G]
-       subports:           []
+       capabilities:       [enet40G, split_4]
+       subports:           [53-1,53-2,53-3,53-4]
        supported_modules:  [TBD]
        module_eeprom:      qsfpp53
        module_signals:
             qsfpp_reset:
                 device:     cpld3
                 register:   0x15
-                bitmask:    0x10
+                bitmask:    0x08
             qsfpp_mod_present:
                 device:     cpld3
                 register:   0x14
-                bitmask:    0x10
+                bitmask:    0x08
                 polarity:   negative
             qsfpp_int:
                 device:     cpld3
                 register:   0x13
-                bitmask:    0x10
+                bitmask:    0x08
             qsfpp_lp_mode:
                 device:     cpld3
                 register:   0x16
-                bitmask:    0x10
+                bitmask:    0x08
             qsfpp_interrupt:
                 device:     cpld3
                 register:   0x12
-                bitmask:    0x10
+                bitmask:    0x08
+    -  name:             "53-1"
+       switch_device:      0
+       switch_device_port: 61
+       parent_port:        53
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      1
+    -  name:             "53-2"
+       switch_device:      0
+       switch_device_port: 62
+       parent_port:        53
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      2
+    -  name:             "53-3"
+       switch_device:      0
+       switch_device_port: 63
+       parent_port:        53
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      3
+    -  name:             "53-4"
+       switch_device:      0
+       switch_device_port: 64
+       parent_port:        53
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      4
     -  name:             54
        switch_device:      0
        switch_device_port: 69
@@ -2031,8 +1845,8 @@ ports:
        connector:          QSFP_PLUS
        max_speed:          40000
        speeds:             [40000]
-       capabilities:       [enet40G]
-       subports:           []
+       capabilities:       [enet40G, split_4]
+       subports:           [54-1,54-2,54-3,54-4]
        supported_modules:  [TBD]
        module_eeprom:      qsfpp54
        module_signals:
@@ -2057,3 +1871,51 @@ ports:
                 device:     cpld3
                 register:   0x12
                 bitmask:    0x20
+    -  name:             "54-1"
+       switch_device:      0
+       switch_device_port: 69
+       parent_port:        54
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      1
+    -  name:             "54-2"
+       switch_device:      0
+       switch_device_port: 70
+       parent_port:        54
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      2
+    -  name:             "54-3"
+       switch_device:      0
+       switch_device_port: 71
+       parent_port:        54
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      3
+    -  name:             "54-4"
+       switch_device:      0
+       switch_device_port: 72
+       parent_port:        54
+       pluggable:          False
+       connector:          QSFP_PLUS
+       max_speed:          10000
+       speeds:             [10000]
+       capabilities:       [enet10G]
+       subports:           []
+       supported_modules:  [TBD]
+       subport_number:      4
