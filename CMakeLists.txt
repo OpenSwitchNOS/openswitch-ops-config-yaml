@@ -47,7 +47,7 @@ set(YAML_CONFIG_VERSION_PATCH "0")
 set(YAML_CONFIG_VERSION "${YAML_CONFIG_VERSION_MAJOR}.${YAML_CONFIG_VERSION_MINOR}.${YAML_CONFIG_VERSION_PATCH}")
 set_target_properties(${CONFIG_YAML} PROPERTIES VERSION ${YAML_CONFIG_VERSION})
 
-configure_file(config-yaml.pc.in config-yaml.pc @ONLY)
+configure_file(ops-config-yaml.pc.in ops-config-yaml.pc @ONLY)
 
 target_link_libraries (${CONFIG_YAML} ${YAMLCPP_LIBRARIES})
 
@@ -59,7 +59,7 @@ install(TARGETS ${CONFIG_YAML}
         LIBRARY DESTINATION lib
     )
 
-install(FILES ${CMAKE_BINARY_DIR}/config-yaml.pc DESTINATION lib/pkgconfig)
+install(FILES ${CMAKE_BINARY_DIR}/ops-config-yaml.pc DESTINATION lib/pkgconfig)
 
 install(FILES config-yaml.h i2c.h
 	DESTINATION include)

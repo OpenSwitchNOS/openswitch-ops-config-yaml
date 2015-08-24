@@ -23,5 +23,4 @@ Description: Library to parse configuration in YAML
 Version: @YAML_CONFIG_VERSION@
 Requires: yaml-cpp
 Libs: -L${libdir} -lconfig-yaml
-Cflags: -I${includedir} 
-
+Cflags: -I${includedir}
