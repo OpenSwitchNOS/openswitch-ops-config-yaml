@@ -17,8 +17,8 @@
 
 #include <gtest/gtest.h>
 
-#include "../config-yaml.h"
-#include "../config-yaml.cpp"
+#include "../include/config-yaml.h"
+#include "../src/config-yaml.cpp"
 
 #include "cfg_yaml_ut.h"
 

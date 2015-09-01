@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <strings.h>
 
-#include "../config-yaml.h"
+#include "../include/config-yaml.h"
 
 extern int ops_cnt;
 

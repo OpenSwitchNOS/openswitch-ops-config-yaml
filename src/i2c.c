@@ -174,7 +174,7 @@ i2c_execute(
         return EINVAL;
     }
 
-    // HALON_TODO: need better i2c_op array functions to avoid
+    // OPS_TODO: need better i2c_op array functions to avoid
     // having to count operations before accumulating them.
     count += count_pre(handle, subsyst, dev);
     count += count_ops(cmds);
@@ -182,7 +182,7 @@ i2c_execute(
 
     all_cmds = (i2c_op **)calloc(sizeof(i2c_op *), count);
 
-    // HALON_TODO: need to look at bus to see if it crosses a subsystem boundary
+    // OPS_TODO: need to look at bus to see if it crosses a subsystem boundary
     // and jump to the other subsystem (recursively) to pick up any pre and
     // post operations that may be required.
     idx = add_pre(handle, subsyst, dev, all_cmds, idx);
@@ -190,7 +190,7 @@ i2c_execute(
     idx = add_post(handle, subsyst, dev, all_cmds, idx);
 
     // verify that all operations are to the same bus
-    // HALON_TODO: bus may change as we cross the boundary between subsystems
+    // OPS_TODO: bus may change as we cross the boundary between subsystems
 
     dev = yaml_find_device(handle, subsyst, all_cmds[0]->device);
 
@@ -368,4 +368,3 @@ i2c_execute(
 
     return final_rc;
 }
-

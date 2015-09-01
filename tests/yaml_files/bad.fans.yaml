@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-#  Fans Description File for CFG_YAML unit testing.
+#  BAD Fans Description File for CFG_YAML unit testing.
 
 manufacturer:    HP
 product_name:    UNIT_TEST
@@ -22,7 +22,10 @@ version:         '1'
 # import or reference devices list here
 
 fan_info:
-     number_fan_frus:   5   #  5 controllable fan frus
+#
+# There are 5 fan FRUs listed below. Let's give a wrong number here.
+#
+     number_fan_frus:   6   #  5 controllable fan frus
 
      fan_speed_control_type:   SINGLE             # SINGLE or PER_FAN
      fan_speed_control:
@@ -86,7 +89,10 @@ fan_frus:
                    bitmask:    0xFF
 
    -   number:          2
-       fan_leds:
+#
+# Let's misspell "fan_leds"
+#
+       fan_ledss:
             device:     cpld1
             register:   0x16
             bitmask:    0x0C
@@ -204,4 +210,3 @@ fan_frus:
                    device:     cpld1
                    register:   0x1C
                    bitmask:    0xFF
-

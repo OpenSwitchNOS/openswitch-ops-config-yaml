@@ -16,9 +16,9 @@
  */
 
 /************************************************************************//**
- * @defgroup config_yaml Halon H/W Configuration and I2C Library
+ * @defgroup config_yaml OpenSwitch H/W Configuration and I2C Library
  * This library provides functions to parse the H/W description files
- * written in YAML language for Halon subsystems, as well as functions that
+ * written in YAML language for OpenSwitch subsystems, as well as functions that
  * access i2c devices based on the contents of the H/W description files.
  *
  * @{
@@ -254,7 +254,7 @@ typedef enum {
     F2B,            /*!< Front to Back */
     B2F,            /*!< Back to Front */
     FIXED,          /*!< fixed, that is, it can't be changed */
-    SETTABLE        /* HALON_TODO: this doesn't make sense to me */
+    SETTABLE        /* OPS_TODO: this doesn't make sense to me */
 } YamlFanDirection;     /* doesn't B2F or F2B mean FIXED? */
 
 /************************************************************************//**
