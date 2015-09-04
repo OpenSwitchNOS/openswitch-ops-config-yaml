@@ -22,12 +22,12 @@ import time
 import subprocess
 import pytest
 
-from halonvsi.docker import *
-from halonvsi.halon import *
+from opsvsi.docker import *
+from opsvsi.opsvsitest import *
 
 SRC_PATH = "./src/ops-config-yaml/"
-TEST_PRG_PATH = SRC_PATH + "build/unit_test/cfg_yaml_ut"
-TEST_FILES_PATH = SRC_PATH + "unit_test/yaml_files"
+TEST_PRG_PATH = SRC_PATH + "build/tests/cfg_yaml_ut"
+TEST_FILES_PATH = SRC_PATH + "tests/yaml_files"
 
 # Test case configuration.
 
@@ -69,17 +69,17 @@ class mySingleSwitchTopo( Topo ):
         for s in irange(1, sws):
             switch = self.addSwitch('s%s' %s)
 
-class configyamlTest(HalonTest):
+class configyamlTest(OpsVsiTest):
 
     def setupNet(self):
 
-        # Create a topology with one Halon switch
+        # Create a topology with one OpenSwitch switch
         host_opts = self.getHostOpts()
         switch_opts = self.getSwitchOpts()
         configyaml_topo = mySingleSwitchTopo(sws=1, hopts=host_opts, sopts=switch_opts)
 
-        self.net = Mininet(configyaml_topo, switch=HalonSwitch,
-                           host=Host, link=HalonLink,
+        self.net = Mininet(configyaml_topo, switch=VsiOpenSwitch,
+                           host=Host, link=OpsVsiLink,
                            controller=None, build=True)
 
     # Pre-test setup
@@ -97,7 +97,7 @@ class configyamlTest(HalonTest):
     # Post-test cleanup
     def test_post_cleanup(self):
         s1 = self.net.switches[0]
-        s1.cmd("rm -rf /tmp/unit_test /tmp/cfg_yaml_ut")
+        s1.cmd("rm -rf /tmp/yaml_files /tmp/cfg_yaml_ut")
 
     def test_001_config_yaml(self):
 
