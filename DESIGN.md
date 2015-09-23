@@ -1,5 +1,4 @@
-High level design of OPS-CONFIG-YAML
-====================================
+# High level design of ops-config-yaml
 
 The ops-config-yaml library consists of functions to parse and access hardware description file contents, as well as an i2c device access function that is integrated with the hardware description access code.
 
@@ -40,7 +39,7 @@ They create a handle to be used with all other ops-config-yaml library calls by 
     YamlConfigHandle yaml_new_config_handle(void);
 
 
-They add one or more [subsystems][2] by calling *yaml\_add\_subsystem*.
+They add one or more subsystems by calling *yaml\_add\_subsystem*.
 
     int yaml_add_subsystem(
         YamlConfigHandle handle,
@@ -349,10 +348,7 @@ The YamlConfigHandle opaque value that the client application uses is actually a
 References
 ----------
 * [yaml-cpp](https://github.com/jbeder/yaml-cpp "GitHub")
-* [subsystem](subsystem)
 * [yaml.org](http://yaml.org)
 * [YAML](https://en.wikipedia.org/wiki/YAML "Wikipedia")
 
 [1]: https://github.com/jbeder/yaml-cpp "GitHub"
-[2]: subsystem
-
