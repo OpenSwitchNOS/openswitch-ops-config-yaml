@@ -1,4 +1,4 @@
-OPS-CONFIG-YAML
+ops-config-yaml
 ===============
 
 What is ops-config-yaml?
@@ -7,18 +7,18 @@ ops-config-yaml is a library that is used by applications to parse and access YA
 
 What is the structure of the repository?
 ----------------------------------------
-* tests/ contains all of the unit tests of ops-config-yaml based on [ops-test-framework](http://git.openswitch.net/openswitch/ops-test-framework)
+* tests/ contains all of the unit tests of ops-config-yaml based on ops-test-framework
 * src/ contains the source files for ops-config-yaml
 * include/ contains the header files that applications should include when using ops-config-yaml
 
 What is the license?
 --------------------
-The ops-config-yaml library may be used under the terms of the Apache 2.0 license. For more details refer to [COPYING](COPYING).
+The ops-config-yaml library may be used under the terms of the Apache 2.0 license. For more details refer to [COPYING](https://git.openswitch.net/cgit/openswitch/ops-config-yaml/tree/COPYING).
 
 What other documents are available?
 ===================================
-For a high level design of ops-config-yaml, refer to [DESIGN.md](DESIGN.md).
-For answers to common questions, read [FAQ.md](FAQ.md).
-For the current list of contributors and maintainers, refer to [AUTHORS.md](AUTHORS.md).
+For a high level design of ops-config-yaml, refer to [DESIGN](https://www.openswitch.net/documents/dev/ops-config-yaml/DESIGN).
+For answers to common questions, read [FAQ](https://git.openswitch.net/cgit/openswitch/ops-config-yaml/tree/FAQ.md).
+For the current list of contributors and maintainers, refer to [AUTHORS](https://git.openswitch.net/cgit/openswitch/ops-config-yaml/tree/AUTHORS.md).
 
-For general information about OpenSwitch project refer to [http://openswitch.net](http://openswitch.net).
+For general information about OpenSwitch project refer to [http://www.openswitch.net](http://www.openswitch.net).
