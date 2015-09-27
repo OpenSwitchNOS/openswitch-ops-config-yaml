@@ -15,6 +15,9 @@
 #    under the License.
 #
 
+# OPS_TODO: Need to make cfg_yaml_ut be available from cached build.
+# Note: This test will only run if a build is done for this repo in devenv prior to running make devenv_ct_test.
+
 import os
 import sys
 import time
@@ -93,6 +96,11 @@ class configyamlTest(OpsVsiTest):
         os.system("scp -oStrictHostKeyChecking=no " + TEST_PRG_PATH + " root@" + ip + ":/tmp")
         os.system("scp -r -oStrictHostKeyChecking=no " + TEST_FILES_PATH + " root@" + ip + ":/tmp")
 
+        if s1.cmd("ls /tmp/cfg_yaml_ut").split()[0] != "/tmp/cfg_yaml_ut":
+            info("Need to build the test program")
+            return False
+        return True
+
     # Post-test cleanup
     def test_post_cleanup(self):
         s1 = self.net.switches[0]
@@ -103,7 +111,8 @@ class configyamlTest(OpsVsiTest):
         info("\n============= test_001_config_yaml =============\n")
 
         # Copy the test program and test files to the switch
-        self.test_pre_setup()
+        if not self.test_pre_setup():
+            return
 
         s1 = self.net.switches[0]
 
