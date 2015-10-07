@@ -194,6 +194,7 @@ i2c_execute(
     dev = yaml_find_device(handle, subsyst, all_cmds[0]->device);
 
     if (dev == NULL) {
+        free(all_cmds);
         return EINVAL;
     }
 
