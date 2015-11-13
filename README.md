@@ -3,13 +3,13 @@ ops-config-yaml
 
 What is ops-config-yaml?
 ------------------------
-ops-config-yaml is a library that is used by applications to parse and access YAML hardware description files for subsystems in a switch. The ops-config-yaml library also includes a closely tied function to execute i2c commands to devices identified in the devices.yaml file for a subsystem.
+The ops-config-yaml library is used by applications to parse and access YAML hardware description files for subsystems in a switch. The ops-config-yaml library also includes a closely tied function to execute i2c commands to devices identified in the devices.yaml file for a subsystem.
 
 What is the structure of the repository?
 ----------------------------------------
-* tests/ contains all of the unit tests of ops-config-yaml based on ops-test-framework
-* src/ contains the source files for ops-config-yaml
-* include/ contains the header files that applications should include when using ops-config-yaml
+-The tests/ area contains all of the ops-config-yaml unit tests based on the ops-test-framework.
+-The src/ area contains the source files for ops-config-yaml.
+-The include/ area contains the header files that applications include when using ops-config-yaml.
 
 What is the license?
 --------------------

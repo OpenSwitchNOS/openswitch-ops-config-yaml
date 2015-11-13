@@ -79,6 +79,8 @@ int yaml_parse_leds(
 ```
 
 The daemons request information from the library using *yaml\_get\_\** and *yaml\_find\_\** functions.
+
+Power supplies
 --------------
 ```
 typedef struct {
