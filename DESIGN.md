@@ -5,11 +5,11 @@ The ops-config-yaml library consists of functions to parse and access hardware d
 
 Responsibilities
 ----------------
-The ops-config-yaml library provides access to the hardware description files defined for a subsystem, giving software convenient methods for accessing content of the hardware-specific information about the switch. It also provides an interface to execute i2c operations to a device. It is the i2c operation function's responsibility to determine additional i2c operations required as a precursor to accessing a device, such as configuring an i2c mux to provide access to the bus segment that the device is connected to.
+The ops-config-yaml library provides access to the hardware description files defined for a subsystem, allowing the software convenient methods for accessing switch hardware-specific information. It also provides an interface to execute i2c operations to a device. It is the function of the i2c operation to determine additional i2c operations required as a precursor to accessing a device, such as configuring an i2c mux to provide access to the bus segment that the device is connected to.
 
 Design choices
 --------------
-The OpenSwitch team chose YAML as the format for the hardware description files over other textual representations. Other representations considered include XML and JSON. YAML was selected as it has a relatively simple and uncluttered format that is relatively easy for humans to read and edit.
+The OpenSwitch team chose YAML as the format for the hardware description files over other textual representations. Other representations considered include XML and JSON. YAML was selected as it has a simple and uncluttered format that is relatively easy for humans to read and edit.
 
 The ops-config-yaml library relies on the [yaml-cpp][1] library. This yaml parsing library was selected for its powerful Object Oriented API and liberal licensing terms.
 
@@ -33,7 +33,7 @@ Internal Structure
 ```
 There are a number of daemons that use ops-config-yaml to access the hardware description file and execute i2c operations to devices identified in those files. All of these daemons use ops-config-yaml in similar ways.
 
-They create a handle to be used with all other ops-config-yaml library calls by calling *yaml\_new\_config\_handle*, which returns an opaque *YamlConfigHandle* value.
+The daemons create a handle that is used with all other ops-config-yaml library calls by calling *yaml\_new\_config\_handle*, which returns an opaque *YamlConfigHandle* value.
 
 ```
 typedef void *YamlConfigHandle;
@@ -50,8 +50,7 @@ int yaml_add_subsystem(
     const char *dir_name);
 ```
 
-They add the relevant hardware description files for the information and access
-they need by calling the *yaml\_parse\_\** functions.
+The daemons add the relevant hardware description files for the information and access they need by calling the *yaml\_parse\_\** functions.
 
 ```
 int yaml_parse_devices(
@@ -79,10 +78,7 @@ int yaml_parse_leds(
     const char *subsyst);
 ```
 
-They request information from the library using *yaml\_get\_\** and *yaml\_find\_\** functions.
-
-
-Power Supplies
+The daemons request information from the library using *yaml\_get\_\** and *yaml\_find\_\** functions.
 --------------
 ```
 typedef struct {
@@ -356,7 +352,8 @@ typedef struct {
     string                  dir_name;
 } YamlSubsystem;
 ```
-The YamlConfigHandle opaque value that the client application uses is actually a pointer to a YamlConfigHandlePrivate structure, which contains a C++ map that allows the code to lookup a YamlSubsystem by its name.
+The YamlConfigHandle opaque value that the client application uses is actually a pointer to a YamlConfigHandlePrivate structure, which contains a C++ map that allows the code to look up a YamlSubsystem by
+ name.
 ```
 typedef struct {
     map<string, YamlSubsystem*> subsystem_map;
