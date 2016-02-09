@@ -37,5 +37,5 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${YAMLCPP_IN
 # Rules to locate needed libraries
 add_executable(${CFG_YAML_UT_EXE} ${SOURCES})
 
-target_link_libraries(${CFG_YAML_UT_EXE} -lpthread
+target_link_libraries(${CFG_YAML_UT_EXE} -pthread
                       ${GTEST_LIBRARIES} ${YAMLCPP_LIBRARIES})
