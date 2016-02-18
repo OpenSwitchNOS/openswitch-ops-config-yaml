@@ -41,3 +41,5 @@ files:
         filename:   bad.power.yaml
     -   name:       leds
         filename:   bad.leds.yaml
+    -   name:       fru
+        filename:   bad.fru.yaml

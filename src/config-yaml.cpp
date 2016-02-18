@@ -26,6 +26,7 @@ using namespace std;
 #include "yaml-cpp/yaml.h"
 #include "config-yaml.h"
 
+
 typedef struct {
     map<string, YamlDevice> device_map;
 
@@ -50,6 +51,8 @@ typedef struct {
     YamlLedInfo             led_info;
     vector<YamlLedType>     led_types;
     vector<YamlLed>         leds;
+
+    YamlFruInfo             fru_info;
 
     vector<i2c_op>          init_ops;
 
@@ -736,6 +739,39 @@ static void operator >> (const YAML::Node &node, vector<YamlFanFru> &fans)
     }
 }
 
+static void operator >> (const YAML::Node &node, YamlFruInfo &fru_info)
+{
+    string str;
+    node["device_version"] >> fru_info.device_version;
+    node["num_mac"] >> fru_info.num_macs;
+    node["country_code"] >> str;
+    fru_info.country_code = strdup(str.c_str());
+    node["diag_version"] >> str;
+    fru_info.diag_version = strdup(str.c_str());
+    node["label_revision"] >> str;
+    fru_info.label_revision = strdup(str.c_str());
+    node["mac_base"] >> str;
+    fru_info.base_mac_address = strdup(str.c_str());
+    node["manufacture_date"] >> str;
+    fru_info.manufacture_date = strdup(str.c_str());
+    node["manufacturer"] >> str;
+    fru_info.manufacturer = strdup(str.c_str());
+    node["onie_version"] >> str;
+    fru_info.onie_version = strdup(str.c_str());
+    node["part_number"] >> str;
+    fru_info.part_number = strdup(str.c_str());
+    node["platform_name"] >> str;
+    fru_info.platform_name = strdup(str.c_str());
+    node["product_name"] >> str;
+    fru_info.product_name = strdup(str.c_str());
+    node["serial_number"] >> str;
+    fru_info.serial_number = strdup(str.c_str());
+    node["service_tag"] >> str;
+    fru_info.service_tag = strdup(str.c_str());
+    node["vendor"] >> str;
+    fru_info.vendor = strdup(str.c_str());
+}
+
 static void operator >> (const YAML::Node &node, YamlFile &file)
 {
     string str;
@@ -825,6 +861,23 @@ init_info_fields(YamlSubsystem *sub)
     // YamlLedInfo
     sub->led_info.number_leds = 0;
     sub->led_info.number_types = 0;
+
+    // YamlFruInfo
+    sub->fru_info.country_code = '\0';
+    sub->fru_info.device_version = 0;
+    sub->fru_info.diag_version = '\0';
+    sub->fru_info.label_revision = '\0';
+    sub->fru_info.manufacture_date = '\0';
+    sub->fru_info.manufacturer = '\0';
+    sub->fru_info.num_macs = 0;
+    sub->fru_info.onie_version = '\0';
+    sub->fru_info.part_number = '\0';
+    sub->fru_info.platform_name = '\0';
+    sub->fru_info.product_name = '\0';
+    sub->fru_info.serial_number = '\0';
+    sub->fru_info.service_tag = '\0';
+    sub->fru_info.vendor = '\0';
+    sub->fru_info.base_mac_address = '\0';
 }
 
 extern "C" const YamlLedType *
@@ -936,6 +989,23 @@ yaml_get_psu_info(YamlConfigHandle handle, const char *subsyst)
     }
 
     return(&sub->psu_info);
+}
+
+extern "C" const YamlFruInfo *
+yaml_get_fru_info(YamlConfigHandle handle, const char *subsyst)
+{
+    YamlConfigHandlePrivate *priv_handle = (YamlConfigHandlePrivate *)handle;
+    string sub_str = subsyst;
+
+    YamlSubsystem *sub = NULL;
+
+    try {
+        sub = priv_handle->subsystem_map.at(sub_str);
+    } catch(...) {
+        return(NULL);
+    }
+
+    return(&sub->fru_info);
 }
 
 extern "C" const YamlPsu *
@@ -1551,6 +1621,55 @@ yaml_parse_leds(YamlConfigHandle handle, const char *subsyst)
         doc["led_types"] >> sub->led_types;
         doc["leds"] >> sub->leds;
     } catch (YAML::RepresentationException &re) {
+        return(-1);
+    } catch (...) {
+        return(-1);
+    }
+
+    return(0);
+}
+
+extern "C" int
+yaml_parse_fru(YamlConfigHandle handle, const char *subsyst)
+{
+    YAML::Node doc;
+    const YamlFile *yfile = NULL;
+    YamlConfigHandlePrivate *priv_hand = (YamlConfigHandlePrivate *)handle;
+
+    YamlSubsystem *sub = NULL;
+    string sub_str = subsyst;
+    try {
+        sub = priv_hand->subsystem_map.at(sub_str);
+    } catch(...) {
+        return(-1);
+    }
+
+    // Get the name for the ports file
+    yfile = yaml_find_file(handle, subsyst, YAML_FRU_NAME);
+
+    if (yfile == NULL) {
+        return(-1);
+    }
+
+    string file_name = sub->dir_name + string(yfile->filename);
+
+    ifstream fin(file_name.c_str());
+    if (fin.fail()) {
+        return(-1);
+    }
+
+    try {
+        YAML::Parser parser(fin);
+        parser.GetNextDocument(doc);
+    } catch (YAML::ParserException &pe) {
+        return(-1);
+    } catch (...) {
+        return(-1);
+    }
+
+    try {
+        doc["fru_info"] >> sub->fru_info;
+    } catch (YAML::KeyNotFound &re) {
         return(-1);
     } catch (...) {
         return(-1);
