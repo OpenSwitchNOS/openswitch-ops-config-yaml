@@ -299,6 +299,12 @@ TEST_F(CfgYamlTestSuite, cfg_005_yaml_parse_good_files) {
     rc = yaml_parse_leds(cy_handle, BASE_SUBSYSTEM);
     ASSERT_EQ(rc, 0);
 
+    /* Call yaml_parse_fru() with valid subsystem,
+     * and valid directory. The call should pass */
+    printf("Parse fru with valid yaml.\n");
+    rc = yaml_parse_fru(cy_handle, BASE_SUBSYSTEM);
+    ASSERT_EQ(rc, 0);
+
     unlink_file(cwd, MANIFEST_FILE);
 }
 
@@ -357,6 +363,12 @@ TEST_F(CfgYamlTestSuite, cfg_006_yaml_parse_bad_files) {
      * and valid directory. The call should pass */
     printf("Parse leds with valid subsystem.\n");
     rc = yaml_parse_leds(cy_handle, BASE_SUBSYSTEM);
+    ASSERT_NE(rc, 0);
+
+    /* Call yaml_parse_fru() with valid subsystem,
+     * and valid directory. The call should pass */
+    printf("Parse fru with valid subsystem.\n");
+    rc = yaml_parse_fru(cy_handle, BASE_SUBSYSTEM);
     ASSERT_NE(rc, 0);
 
     unlink_file(cwd, MANIFEST_FILE);
@@ -418,6 +430,12 @@ TEST_F(CfgYamlTestSuite, cfg_007_yaml_parse_unspecified_bad_files) {
     printf("Parse leds with no leds in manifest file.\n");
     rc = yaml_parse_leds(cy_handle, BASE_SUBSYSTEM);
     ASSERT_EQ(rc, 0);
+
+    /* Call yaml_parse_fru() with valid subsystem,
+     * and valid directory. The call should pass */
+    printf("Parse fru with no fru in manifest file.\n");
+    rc = yaml_parse_fru(cy_handle, BASE_SUBSYSTEM);
+    ASSERT_EQ(rc, -1);
 
     unlink_file(cwd, MANIFEST_FILE);
 }

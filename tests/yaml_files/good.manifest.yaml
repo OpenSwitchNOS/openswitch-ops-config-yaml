@@ -41,3 +41,5 @@ files:
         filename:   power.yaml
     -   name:       leds
         filename:   leds.yaml
+    -   name:       fru
+        filename:   fru.yaml

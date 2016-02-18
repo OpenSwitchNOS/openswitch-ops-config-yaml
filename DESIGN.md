@@ -77,6 +77,10 @@ int yaml_parse_psus(
 int yaml_parse_leds(
     YamlConfigHandle handle,
     const char *subsyst);
+
+int yaml_parse_fru(
+    YamlConfigHandle handle,
+    const char *subsyst);
 ```
 
 They request information from the library using *yaml\_get\_\** and *yaml\_find\_\** functions.
@@ -321,6 +325,27 @@ YamlPortInfo *yaml_get_port_info(
     YamlConfigHandle handle,
     const char *subsyst);
 ```
+FRU Info
+-----
+```
+typedef struct {
+   char *country_code;
+   char device_version;
+   char *diag_version;
+   char *label_revision;
+   char *base_mac_address;
+   char *manufacture_date;
+   char *manufacturer;
+   int num_macs;
+   char *onie_version;
+   char *part_number;
+   char *platform_name;
+   char *product_name;
+   char *serial_number;
+   char *service_tag;
+   char *vendor;
+} YamlFruInfo;
+```
 Internal Data Structures
 ------------------------
 
@@ -350,6 +375,8 @@ typedef struct {
     YamlLedInfo             led_info;
     vector<YamlLedType>     led_types;
     vector<YamlLed>         leds;
+ 
+    YamlFruInfo             fru_info;
 
     vector<i2c_op>          init_ops;
 
