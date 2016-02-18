@@ -62,6 +62,7 @@ extern "C" {
 #define YAML_PORTS_NAME "ports"       /*!< Name to identify ports file */
 #define YAML_POWER_NAME "power"       /*!< Name to identify power file */
 #define YAML_THERMAL_NAME "thermal"   /*!< Name to identify thermal file */
+#define YAML_FRU_NAME "fru"           /*!< Name to identify fru file */
 
 /************************************************************************//**
  * STRUCT that contains the content of the subsystem_info portion of the
@@ -393,6 +394,27 @@ typedef struct {
     int number_types;       /*!< Number of LED types */
 } YamlLedInfo;
 
+/************************************************************************//**
+ * STRUCT that contains the content of the fru_info section of the
+ *    fru.yaml file.
+ ***************************************************************************/
+typedef struct {
+   char *country_code;
+   char device_version;
+   char *diag_version;
+   char *label_revision;
+   char *base_mac_address;
+   char *manufacture_date;
+   char *manufacturer;
+   int num_macs;
+   char *onie_version;
+   char *part_number;
+   char *platform_name;
+   char *product_name;
+   char *serial_number;
+   char *service_tag;
+   char *vendor;
+} YamlFruInfo;
 
 /************************************************************************//**
  * TYPEDEF for the opaque Yaml config handle used for each call. The handle
@@ -733,6 +755,26 @@ extern int yaml_get_led_count(YamlConfigHandle handle, const char *subsyst);
  * @return number of LED Types on success, else -1 on failure
  ***************************************************************************/
 extern int yaml_get_led_type_count(YamlConfigHandle handle, const char *subsyst);
+
+/************************************************************************//**
+ * Parses and stores internally the information in the fru.yaml file
+ *
+ * @param[in] handle    :YamlConfigHandle for this subsystem
+ * @param[in] subsyst   :Name of the subsystem
+ *
+ * @return 0 on success, else -1 on failure
+ ***************************************************************************/
+extern int yaml_parse_fru(YamlConfigHandle handle, const char *subsyst);
+
+/************************************************************************//**
+ * Returns a pointer to the Fru Info in the fru.yaml file
+ *
+ * @param[in] handle    :YamlConfigHandle for this subsystem
+ * @param[in] subsyst   :Name of the subsystem
+ *
+ * @return YamlFruInfo * on success, else NULL on failure
+ ***************************************************************************/
+extern const YamlFruInfo *yaml_get_fru_info(YamlConfigHandle handle, const char *subsyst);
 
 #ifdef __cplusplus
 };
