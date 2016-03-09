@@ -27,6 +27,7 @@ using namespace std;
 #include "config-yaml.h"
 
 
+
 typedef struct {
     map<string, YamlDevice> device_map;
 
@@ -59,9 +60,43 @@ typedef struct {
     string                  dir_name;
 } YamlSubsystem;
 
+
 typedef struct {
+
+    string                      dir_path;
+    char*                       chassis_info;
+    map<string, YamlCards>      card_map;
+
     map<string, YamlSubsystem*> subsystem_map;
 } YamlConfigHandlePrivate;
+
+static void operator >> (const YAML::Node &node, YamlCards &card)
+{
+    string str;
+    node["name"] >> str;
+    card.card_name = strdup(str.c_str());
+
+    node["numofcards"]>> card.num_of_cards;
+
+    vector<string> strs;
+    node["cardsdirname"] >> strs;
+    card.dir_names = (char **)malloc(sizeof(char *) * (strs.size() + 1));
+    card.dir_names[strs.size()] = NULL;
+
+    for (size_t idx = 0; idx < strs.size(); idx++) {
+        card.dir_names[idx] = strdup(strs[idx].c_str());
+    }
+    strs.clear();
+}
+
+static void operator >> (const YAML::Node &node, map<string, YamlCards> &cards)
+{
+    for (size_t i = 0; i < node.size(); i++) {
+        YamlCards card;
+        node[i] >> card;
+        cards[card.card_name] = card;
+    }
+}
 
 static void operator >> (const YAML::Node &node, YamlSubsysInfo &sub_info)
 {
@@ -809,6 +844,8 @@ static void operator >> (const YAML::Node &node, map<string, YamlBus> &buses)
     }
 }
 
+
+
 void
 init_info_fields(YamlSubsystem *sub)
 {
@@ -1220,6 +1257,52 @@ yaml_get_thermal_info(YamlConfigHandle handle, const char *subsyst)
     }
 
     return &sub->thermal;
+}
+extern "C" int
+yaml_parse_chassis(YamlConfigHandle handle, const char *subsyst,const char *dirpath)
+{
+
+    YamlConfigHandlePrivate *priv_hand = (YamlConfigHandlePrivate *)handle;
+
+
+    if (priv_hand->subsystem_map.find(subsyst) !=
+                                priv_hand->subsystem_map.end()) {
+        return(-1);
+    }
+
+    string str = dirpath;
+    str = str + '/';
+    priv_hand->dir_path = strdup(str.c_str());
+    string file_name = priv_hand->dir_path + YAML_CHASSIS_FILENAME;
+
+    ifstream fin(file_name.c_str());
+    if (fin.fail()) {
+        return -1;
+    }
+
+    YAML::Node doc;
+    try {
+        YAML::Parser parser(fin);
+        parser.GetNextDocument(doc);
+    } catch (YAML::ParserException &pe) {
+        return(-1);
+    } catch (...) {
+        return(-1);
+    }
+
+    string chassisinfo;
+    doc["chassis_info"] >> chassisinfo;
+    priv_hand->chassis_info = strdup(chassisinfo.c_str());
+
+    try {
+        doc["cards"] >> priv_hand->card_map;
+    } catch (YAML::RepresentationException &re) {
+        return(-1);
+    } catch (...) {
+        return(-1);
+    }
+
+    return(0);
 }
 
 extern "C" int

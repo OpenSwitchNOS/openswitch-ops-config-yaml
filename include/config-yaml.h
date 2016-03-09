@@ -62,6 +62,7 @@ extern "C" {
 #define YAML_PORTS_NAME "ports"       /*!< Name to identify ports file */
 #define YAML_POWER_NAME "power"       /*!< Name to identify power file */
 #define YAML_THERMAL_NAME "thermal"   /*!< Name to identify thermal file */
+#define YAML_CHASSIS_FILENAME "chassis.yaml" /*!< Filename of chassis file */
 #define YAML_FRU_NAME "fru"           /*!< Name to identify fru file */
 
 /************************************************************************//**
@@ -395,6 +396,16 @@ typedef struct {
 } YamlLedInfo;
 
 /************************************************************************//**
+ * STRUCT that contains the content of the each card of the
+ *    chassis.yaml file.
+ ***************************************************************************/
+typedef struct {
+    char       *card_name;
+    int        num_of_cards;
+    char       **dir_names;
+} YamlCards;
+
+/************************************************************************//**
  * STRUCT that contains the content of the fru_info section of the
  *    fru.yaml file.
  ***************************************************************************/
@@ -568,6 +579,16 @@ extern int yaml_get_fan_fru_count(YamlConfigHandle handle, const char *subsyst);
  * @return YamlFanInfo * on success, else NULL on failure
  ***************************************************************************/
 extern const YamlFanInfo * yaml_get_fan_info(YamlConfigHandle handle, const char *subsyst);
+
+/************************************************************************//**
+ * Parses and stores internally the information in the chassis.yaml file
+ *
+ * @param[in] handle    :YamlConfigHandle for this subsystem
+ * @param[in] subsyst   :User defined name of the chassis used as identifier
+ * @param[in] dir_name  :Dirpath to the chassis yaml file
+ * @return 0 on success, else -1 on failure
+ ***************************************************************************/
+extern int yaml_parse_chassis(YamlConfigHandle handle, const char *subsyst,const char *dirpath);
 
 /************************************************************************//**
  * Parses and stores internally the information in the manifest.yaml file
