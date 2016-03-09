@@ -52,6 +52,7 @@ extern "C" {
 
 #define SFPP    "SFP_PLUS"      /*!< String to identify SFP+ modules */
 #define QSFPP   "QSFP_PLUS"     /*!< String to identify QSFP+ modules */
+#define QSFP28  "QSFP28"        /*!< String to identify QSFP28 modules */
 
 #define YAML_MANIFEST_FILENAME "manifest.yaml" /*!< Filename of manifest file */
 
@@ -197,11 +198,24 @@ typedef struct {
 } YamlQsfpModuleSignals;
 
 /************************************************************************//**
- * UNION for module operation information for either SFP+ or QSFP+ modules.
+ * STRUCT that contains the content of the module_signals section for QSFP28
+ *    modules in the ports section of the ports.yaml file.
+ ***************************************************************************/
+typedef struct {
+    i2c_bit_op  *qsfp28p_reset;          /*!< i2c op to reset the module */
+    i2c_bit_op  *qsfp28p_mod_present;    /*!< i2c op to determine module presence */
+    i2c_bit_op  *qsfp28p_interrupt;      /*!< i2c op to determine interrupt status */
+    i2c_bit_op  *qsfp28p_interrupt_mask; /*!< i2c op to mask incoming interrupts */
+} YamlQsfp28ModuleSignals;
+
+/************************************************************************//**
+ * UNION for module operation information for either SFP+ or QSFP+ or QSFP28
+ *    modules.
  ***************************************************************************/
 typedef union {
-    YamlSfpModuleSignals   sfp;     /*!< SFP+ op commands */
-    YamlQsfpModuleSignals  qsfp;    /*!< QSFP+ op commands */
+    YamlSfpModuleSignals     sfp;     /*!< SFP+ op commands */
+    YamlQsfpModuleSignals    qsfp;    /*!< QSFP+ op commands */
+    YamlQsfp28ModuleSignals  qsfp28;  /*!< QSFP28 op commands */
 } YamlModuleSignals;
 
 /************************************************************************//**
