@@ -274,6 +274,38 @@ static void operator >> (const YAML::Node &node, i2c_bit_op &op)
     }
 }
 
+static void operator >> (const YAML::Node &node, YamlQsfp28ModuleSignals &signals)
+{
+    if (const YAML::Node *pNode = node.FindValue("qsfp28p_reset")) {
+        i2c_bit_op *op = (i2c_bit_op *)malloc(sizeof(i2c_bit_op));
+
+        *pNode >> *op;
+
+        signals.qsfp28p_reset = op;
+    }
+    if (const YAML::Node *pNode = node.FindValue("qsfp28p_mod_present")) {
+        i2c_bit_op *op = (i2c_bit_op *)malloc(sizeof(i2c_bit_op));
+
+        *pNode >> *op;
+
+        signals.qsfp28p_mod_present = op;
+    }
+    if (const YAML::Node *pNode = node.FindValue("qsfp28p_interrupt")) {
+        i2c_bit_op *op = (i2c_bit_op *)malloc(sizeof(i2c_bit_op));
+
+        *pNode >> *op;
+
+        signals.qsfp28p_interrupt = op;
+    }
+    if (const YAML::Node *pNode = node.FindValue("qsfp28p_interrupt_mask")) {
+        i2c_bit_op *op = (i2c_bit_op *)malloc(sizeof(i2c_bit_op));
+
+        *pNode >> *op;
+
+        signals.qsfp28p_interrupt_mask = op;
+    }
+}
+
 static void operator >> (const YAML::Node &node, YamlQsfpModuleSignals &signals)
 {
     if (const YAML::Node *pNode = node.FindValue("qsfpp_reset")) {
@@ -420,6 +452,8 @@ static void operator >> (const YAML::Node &node, YamlPort &port)
             node["module_signals"] >> port.module_signals.sfp;
         } else if (strcmp(port.connector, QSFPP) == 0) {
             node["module_signals"] >> port.module_signals.qsfp;
+        } else if (strcmp(port.connector, QSFP28) == 0) {
+            node["module_signals"] >> port.module_signals.qsfp28;
         } else {
             memset(&port.module_signals, 0, sizeof(YamlModuleSignals));
         }
