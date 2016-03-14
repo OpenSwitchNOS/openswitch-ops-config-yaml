@@ -1868,6 +1868,7 @@ yaml_parse_qos(YamlConfigHandle handle, const char *subsyst)
     yfile = yaml_find_file(handle, subsyst, YAML_QOS_NAME);
 
     if (yfile == NULL) {
+        VLOG_WARN("QOS platform description file missing.");
         return(0);
     }
 
