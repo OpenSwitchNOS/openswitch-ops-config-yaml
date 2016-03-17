@@ -26,6 +26,7 @@ using namespace std;
 #include "yaml-cpp/yaml.h"
 #include "config-yaml.h"
 
+#define QOS_MAX_STRING_LENGTH 64
 
 typedef struct {
     map<string, YamlDevice> device_map;
@@ -858,12 +859,31 @@ static void operator >> (const YAML::Node &node, YamlQosInfo &qos_info)
 
     node["default_name"] >> str;
     qos_info.default_name = strdup(str.c_str());
+    if (qos_info.default_name != NULL &&
+            strlen(qos_info.default_name) > QOS_MAX_STRING_LENGTH) {
+        std::cout << "config-yaml|ERR|The maximum length is "
+                << QOS_MAX_STRING_LENGTH << " characters: "
+                << qos_info.default_name << std::endl;
+    }
 
     node["factory_default_name"] >> str;
     qos_info.factory_default_name = strdup(str.c_str());
+    if (qos_info.factory_default_name != NULL &&
+            strlen(qos_info.factory_default_name) > QOS_MAX_STRING_LENGTH) {
+        std::cout << "config-yaml|ERR|The maximum length is "
+                << QOS_MAX_STRING_LENGTH << " characters: "
+                << qos_info.factory_default_name << std::endl;
+    }
 
     node["default_qos_trust"] >> str;
     qos_info.trust = strdup(str.c_str());
+    if (qos_info.trust != NULL &&
+            strncmp(qos_info.trust, "none", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(qos_info.trust, "cos", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(qos_info.trust, "dscp", QOS_MAX_STRING_LENGTH) != 0) {
+        std::cout << "config-yaml|ERR|Unexpected qos trust: "
+                << qos_info.trust << std::endl;
+    }
 }
 
 static void operator >> (const YAML::Node &node, YamlScheduleProfileEntry &entry)
@@ -875,9 +895,19 @@ static void operator >> (const YAML::Node &node, YamlScheduleProfileEntry &entry
 
     node["algorithm"] >> str;
     entry.algorithm = strdup(str.c_str());
+    if (entry.algorithm != NULL &&
+            strncmp(entry.algorithm, "strict", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(entry.algorithm, "dwrr", QOS_MAX_STRING_LENGTH) != 0) {
+        std::cout << "config-yaml|ERR|Unexpected algorithm: "
+                << entry.algorithm << std::endl;
+    }
 
     node["weight"] >> str;
     entry.weight = strtol(str.c_str(), 0, 0);
+    if (entry.weight < 1) {
+        std::cout << "config-yaml|ERR|Out of range value for weight: "
+                << entry.weight << std::endl;
+    }
 }
 
 static void operator >> (const YAML::Node &node, vector<YamlScheduleProfileEntry> &entries)
@@ -898,6 +928,12 @@ static void operator >> (const YAML::Node &node, YamlQueueProfileEntry &entry)
 
     node["description"] >> str;
     entry.description = strdup(str.c_str());
+    if (entry.description != NULL &&
+            strlen(entry.description) > QOS_MAX_STRING_LENGTH) {
+        std::cout << "config-yaml|ERR|The maximum length is "
+                << QOS_MAX_STRING_LENGTH << " characters: "
+                << entry.description << std::endl;
+    }
 
     node["local_priority"] >> str;
     entry.local_priority = strtol(str.c_str(), 0, 0);
@@ -919,16 +955,33 @@ static void operator >> (const YAML::Node &node, YamlCosMapEntry &entry)
     /* name is codepoint */
     node["code_point"] >> str;
     entry.code_point = strtol(str.c_str(), 0, 0);
+    if (entry.code_point < 0 || entry.code_point > 7) {
+        std::cout << "config-yaml|ERR|Out of range value for code point: "
+                << entry.code_point << std::endl;
+    }
 
     /* description is name */
     node["description"] >> str;
     entry.description = strdup(str.c_str());
+    if (entry.description != NULL &&
+            strlen(entry.description) > QOS_MAX_STRING_LENGTH) {
+        std::cout << "config-yaml|ERR|The maximum length is "
+                << QOS_MAX_STRING_LENGTH << " characters: "
+                << entry.description << std::endl;
+    }
 
     node["local_priority"] >> str;
     entry.local_priority = strtol(str.c_str(), 0, 0);
 
     node["color"] >> str;
     entry.color = strdup(str.c_str());
+    if (entry.color != NULL &&
+            strncmp(entry.color, "green", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(entry.color, "yellow", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(entry.color, "red", QOS_MAX_STRING_LENGTH) != 0) {
+        std::cout << "config-yaml|ERR|Unexpected color: "
+                << entry.color << std::endl;
+    }
 }
 
 static void operator >> (const YAML::Node &node, vector<YamlCosMapEntry> &entries)
@@ -947,19 +1000,41 @@ static void operator >> (const YAML::Node &node, YamlDscpMapEntry &entry)
     /* name is codepoint */
     node["code_point"] >> str;
     entry.code_point = strtol(str.c_str(), 0, 0);
+    if (entry.code_point < 0 || entry.code_point > 63) {
+        std::cout << "config-yaml|ERR|Out of range value for code point: "
+                << entry.code_point << std::endl;
+    }
 
     node["color"] >> str;
     entry.color = strdup(str.c_str());
+    if (entry.color != NULL &&
+            strncmp(entry.color, "green", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(entry.color, "yellow", QOS_MAX_STRING_LENGTH) != 0 &&
+            strncmp(entry.color, "red", QOS_MAX_STRING_LENGTH) != 0) {
+        std::cout << "config-yaml|ERR|Unexpected color: "
+                << entry.color << std::endl;
+    }
 
     /* description is name */
     node["description"] >> str;
     entry.description = strdup(str.c_str());
+    if (entry.description != NULL &&
+            strlen(entry.description) > QOS_MAX_STRING_LENGTH) {
+        std::cout << "config-yaml|ERR|The maximum length is "
+                << QOS_MAX_STRING_LENGTH << " characters: "
+                << entry.description << std::endl;
+    }
 
     node["local_priority"] >> str;
     entry.local_priority = strtol(str.c_str(), 0, 0);
 
     node["priority_code_point"] >> str;
     entry.priority_code_point = strtol(str.c_str(), 0, 0);
+    if (entry.priority_code_point < 0 || entry.priority_code_point > 7) {
+        std::cout <<
+                "config-yaml|ERR|Out of range value for priority code point: "
+                << entry.priority_code_point << std::endl;
+    }
 }
 
 static void operator >> (const YAML::Node &node, vector<YamlDscpMapEntry> &entries)
