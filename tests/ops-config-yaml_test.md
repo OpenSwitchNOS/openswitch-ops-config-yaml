@@ -2,6 +2,9 @@
 
 [TOC]
 
+## Introduction ##
+The config-yaml test cases verify add subsystem, parse devices, find file, init devices and bad file parsing functionality. The CT script written in Python creates the environment by populating YAML files into system **/tmp** directory. After the initial setup the Python test invokes Unit Test binary created while build process. This binary verifies all the config-yaml functionalities. Note: The binary should only be executed through Python CT script and its not supposed to  be executed manually.
+
 ##  add subsystem ##
 ### Objective ###
 Verify that subsystems are added (or not) as appropriate.
